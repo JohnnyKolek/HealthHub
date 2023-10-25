@@ -1,0 +1,60 @@
+body{
+    margin: 0;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    background: #1F707B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10vw;
+}
+
+
+.logo img{
+    width: 25vw;
+}
+
+.action{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5vh;
+}
+
+button{
+    font-size: 2rem;
+    border-radius: 20px;
+    color: white;
+    width: 25vw;
+    height: 10vh;
+    font-weight: 400;
+}
+
+button.login{
+   background-color: #199A8E;
+   border-width: 0;
+}
+
+button.sign-up{
+    background-color: inherit;
+    border-width: 1px;
+    border-color: white;
+    border-style: solid;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+button.login:hover{
+    color: #199A8E;
+    background-color: white;
+}
+
+button.sign-up:hover{
+    color: #199A8E;
+    background-color: white;
+}
