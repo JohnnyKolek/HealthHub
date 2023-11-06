@@ -9,10 +9,10 @@ body{
 }
 div.login{
     display: flex;
-    background-color: darkgray;
-    width: 30vw;
-    height: 30vh;
-    border-radius: 1rem;
+    background-color: aquamarine;
+    width: 50vw;
+    height: 50vw;
+    border-radius: 2rem;
     align-items: center;
     justify-content: center;
     flex-direction: column;
