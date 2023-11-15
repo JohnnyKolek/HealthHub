@@ -3,6 +3,7 @@ body{
     margin: 0;
     width: 100vw;
     height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
 }
 div.login{
     display: flex;
@@ -44,7 +45,7 @@ form div{
 }
 
 form div input{
-    height: 40px;
+    height: 50px;
     border-radius: 12px;
     width: 20vw;
     border: 1px solid #E5E7EB;
@@ -64,17 +65,25 @@ a{
 }
 
 form button{
+    box-sizing: border-box;
     color: white;
     background-color: #199A8E;
     width: 20vw;
+    height: 50px;
     border-radius: 12px;
-    line-height: 40px;
+    line-height: 30px;
     border: none;
     font-size: 1rem;
    
 }
 
+form button:hover{
+    cursor: pointer;
+    background-color: #1F707B;
+}
+
 p{
+    box-sizing: border-box;
     font-size: 0.9rem;
 }
 
