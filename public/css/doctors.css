@@ -1,0 +1,43 @@
+body{
+    margin: 0;
+}
+
+nav{
+    max-height: 90px;
+    background: #1F707B;
+    display: flex;
+    flex-direction: row;
+    padding: 0 300px;
+    gap: 10vh;
+}
+
+nav ul{
+    display: flex;
+    gap: 10vh;
+    list-style-type: none;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+nav ul li{
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+nav ul li:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+p{
+    margin: 0;
+}
+
+
+
+img{
+    height: 80px;
+    padding: 5px;
+}
