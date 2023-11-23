@@ -25,11 +25,11 @@ body{
 }
 
 button{
-    font-size: 2rem;
+    font-size: 1.5rem;
     border-radius: 20px;
     color: white;
     width: 25vw;
-    height: 10vh;
+    height: 8vh;
     font-weight: 400;
 }
 

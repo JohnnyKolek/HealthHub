@@ -1,14 +1,22 @@
 body{
     margin: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 nav{
     max-height: 90px;
     background: #1F707B;
+    width: 100%;
     display: flex;
     flex-direction: row;
     padding: 0 300px;
     gap: 10vh;
+    position: fixed;
+}
+
+div.doctors{
+    margin-top: 100px;
 }
 
 nav ul{
@@ -32,6 +40,7 @@ nav ul li:hover{
 }
 
 p{
+    font-size: 1.3rem;
     margin: 0;
 }
 
@@ -41,3 +50,35 @@ img{
     height: 80px;
     padding: 5px;
 }
+
+div.container{
+    display: flex;
+    flex-direction: column;
+}
+
+div.doctor{
+    background-color: red;
+    width: 82vw;
+    height: 40vh;
+    margin: 5vh 9vw;
+}
+
+div.info{
+    height: 100%;
+    width: 40%;
+    background-color: #888;
+}
+
+div.photo{
+    width: 30%;
+    height: 60%;
+    image-resolution:initial;
+    overflow: hidden;
+}
+
+div.photo img{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+

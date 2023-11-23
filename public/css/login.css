@@ -26,13 +26,14 @@ form {
     flex-direction: column;
     align-items: center;
     justify-content:space-around;
-    width: 25vw;
-    height: 25vw;
+    min-width: fit-content;
+    min-height: fit-content;
     gap: 1rem;
+    padding: 30px;
 }
 
 form h1{
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-top: 25px;
 }
 
@@ -74,6 +75,7 @@ form button{
     line-height: 30px;
     border: none;
     font-size: 1rem;
+    padding: 7px 0;
    
 }
 
