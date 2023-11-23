@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="../css/dashboard.css" />
+		<link rel="stylesheet" href="/public/css/dashboard.css" />
 		<title>Dashboard</title>
 	</head>
 	<body>
@@ -19,6 +19,9 @@
 		<main>
 			<div class="sidebar">SIDEBAR</div>
 			<div class="elements">
+				<h1>
+					<?= $title ?>
+				</h1>
 				<div class="dog-container">
 					<img
 						class="dog-image"
