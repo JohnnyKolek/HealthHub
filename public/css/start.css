@@ -24,37 +24,43 @@ body{
     gap: 5vh;
 }
 
-button{
-    font-size: 1.5rem;
+a{
+    font-size: 1.3rem;
+    font-family: Arial, Helvetica, sans-serif;
     border-radius: 20px;
     color: white;
     width: 25vw;
     height: 8vh;
     font-weight: 400;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-button.login{
+a.login{
    background-color: #199A8E;
    border-width: 0;
 }
 
-button.sign-up{
+a.sign-up{
     background-color: inherit;
     border-width: 1px;
     border-color: white;
     border-style: solid;
 }
 
-button:hover{
+a:hover{
     cursor: pointer;
 }
 
-button.login:hover{
+a.login:hover{
     color: #199A8E;
     background-color: white;
 }
 
-button.sign-up:hover{
+a.sign-up:hover{
     color: #199A8E;
     background-color: white;
 }
@@ -68,7 +74,7 @@ button.sign-up:hover{
     }
 
 
-    button{
+    a{
         font-size: 1.5rem;
         width: 60vw;
     }

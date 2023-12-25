@@ -32,6 +32,11 @@ form {
     padding: 30px;
 }
 
+.messages{
+    font-size: 0.8rem;
+    color:red;
+}
+
 form h1{
     font-size: 1.5rem;
     margin-top: 25px;

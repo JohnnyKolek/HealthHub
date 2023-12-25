@@ -21,6 +21,7 @@ class AppController {
     protected function render(string $template = null, array $variables = [])
     {
         $templatePath = 'src/views/'. $template.'.php';
+        $output = "";
                 
         if(file_exists($templatePath)){
             extract($variables);

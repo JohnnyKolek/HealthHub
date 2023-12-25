@@ -7,6 +7,8 @@ services:
       dockerfile: docker/nginx/Dockerfile
     ports:
       - "8080:80"
+    networks:
+      - app
     volumes:
       - .:/app/
     links:
@@ -16,6 +18,8 @@ services:
     build:
       context: .
       dockerfile: docker/php/Dockerfile
+    networks:
+      - app
     volumes:
       - .:/app/
   db:
@@ -24,3 +28,13 @@ services:
       dockerfile: docker/db/Dockerfile
     ports:
       - "5433:5432"
+    networks:
+      - app
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+networks:
+  app:
+
+volumes:
+  pgdata:

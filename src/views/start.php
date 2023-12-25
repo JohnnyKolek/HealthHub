@@ -9,11 +9,11 @@
 	<body>
 		<div class="container">
 			<div class="logo">
-				<img src="../../img/logo.svg" />
+				<img src="/public/img/logo.svg" />
 			</div>
 			<div class="action">
-				<button class="login">Login</button>
-				<button class="sign-up">Sign up</button>
+				<a class="login" href="login">Login</a>
+				<a class="sign-up">Sign up</a>
 			</div>
 		</div>
 	</body>

@@ -9,7 +9,7 @@
 	<body>
 		<div class="container">
 			<div class="logo">
-				<img src="../../img/logo.svg" />
+				<img src="../../img/logo.svg"  alt="Logo"/>
 			</div>
 			<div class="menu">
 				<div>
