@@ -31,20 +31,30 @@ div.container{
     gap: 5vh;
 }
 
-.menu div{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 60px;
-    background-color: #1F707B;
-    border-radius: 25px;
-}
+/*.menu div{*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    height: 60px;*/
+/*    background-color: #1F707B;*/
+/*    border-radius: 25px;*/
+/*}*/
 
 .menu a{
+    display: flex;
     text-decoration: none;
     color: #fff;
-    width: 20vw;
-    text-align: center;
-    line-height: 150%;
+    width: 25vw;
+  align-items: center;
+    justify-content: center;
+    background-color: #1F707B;
+    border-radius: 25px;
+    height: 60px;
+}
+
+.menu a:hover{
+    cursor: pointer;
+    background-color: white;
+    color: #1F707B;
 }

@@ -3,6 +3,7 @@
 require_once 'src/controllers/DefaultController.php';
 require_once 'src/controllers/ErrorController.php';
 require_once 'src/controllers/SecurityController.php';
+require_once 'src/controllers/VisitController.php';
 
 
 class Router {

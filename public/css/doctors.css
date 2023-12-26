@@ -46,7 +46,7 @@ p{
 
 
 
-img{
+.logo img{
     height: 80px;
     padding: 5px;
 }
@@ -57,6 +57,7 @@ div.container{
 }
 
 div.doctor{
+    display: flex;
     background-color: red;
     width: 82vw;
     height: 40vh;
@@ -70,15 +71,26 @@ div.info{
 }
 
 div.photo{
-    width: 30%;
-    height: 60%;
-    image-resolution:initial;
+    width: 10vw;
+    height: 12vw;
+    background-color: #fff;
     overflow: hidden;
+    border: 2px black solid;
+    border-radius: 20px;
 }
 
 div.photo img{
-    width: 100%;
-    height: auto;
-    overflow: hidden;
+    padding: 0;
+    max-width: 100%;
+}
+
+p{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.days{
+    display: flex;
 }
 

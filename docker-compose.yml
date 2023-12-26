@@ -26,11 +26,13 @@ services:
     build: 
       context: .
       dockerfile: docker/db/Dockerfile
+    restart: always
     ports:
       - "5433:5432"
     networks:
       - app
     volumes:
+      - ./docker/db/schema/:/docker-entrypoint-initdb.d/
       - pgdata:/var/lib/postgresql/data
 
 networks:

@@ -12,6 +12,7 @@ Router::get('dashboard', 'DefaultController');
 Router::get('menu', 'DefaultController');
 Router::get('fileNotFound', 'ErrorController');
 Router::get('register', 'SecurityController');
+Router::get('doctors', 'VisitController');
 
 
 Router::run($path);

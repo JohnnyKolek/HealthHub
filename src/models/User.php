@@ -5,19 +5,22 @@ class User {
     private $password;
     private $name;
     private $surname;
+    private $phone;
 
     /**
      * @param $email
      * @param $password
      * @param $name
      * @param $surname
+     * @param $phone
      */
-    public function __construct($email, $password, $name, $surname)
+    public function __construct($email, $password, $name, $surname, $phone)
     {
         $this->email = $email;
         $this->password = $password;
         $this->name = $name;
         $this->surname = $surname;
+        $this->phone = $phone;
     }
 
 
@@ -41,9 +44,15 @@ class User {
         return $this->surname;
     }
 
-    public function setPhone($phone)
+    /**
+     * @return mixed
+     */
+    public function getPhone()
     {
+        return $this->phone;
     }
+
+
 
 
 }
