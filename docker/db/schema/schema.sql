@@ -1,20 +1,17 @@
+
 CREATE TABLE user_details
 (
-    id      SERIAL PRIMARY KEY,
-    name    VARCHAR(255),
-    surname VARCHAR(255),
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    surname VARCHAR(255) NOT NULL,
     phone   VARCHAR(20)
 );
 
-
-
 CREATE TABLE users
 (
-    id              SERIAL PRIMARY KEY,
-    user_details_id INT,
-    email           VARCHAR(255),
-    password        VARCHAR(255),
-    enabled         BOOLEAN,
-    created_at      TIMESTAMP,
-    FOREIGN KEY (user_details_id) REFERENCES user_details (id)
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    id_user_details INT NOT NULL,
+    FOREIGN KEY (id_user_details) REFERENCES user_details(id)
 );

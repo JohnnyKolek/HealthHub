@@ -6,7 +6,14 @@ require_once __DIR__ . '/../repository/UserRepository.php';
 
 class SecurityController extends AppController
 {
-    public function login()
+    private UserRepository $userRepository;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->userRepository = new UserRepository();
+    }
+    public function login():void
     {
 
         if (!$this->isPost()) {
@@ -14,25 +21,24 @@ class SecurityController extends AppController
         }
 
         $email = $_POST['email'];
-        $password = $_POST['password'];
+        $password = md5($_POST['password']);
 
-        $repository = new UserRepository();
+        $user = $this->userRepository->getUser($email);
 
-        $user = $repository->getUser($email);
-
-        if($user == null){
-            $this->render('login', ['messages' => ['Wrong credentials!']]);
-
+        if (!$user) {
+            $this->render('login', ['messages' => ['User not found!']]);
         }
 
-        if ($user->getPassword() === $password) {
-            $url = "http://$_SERVER[HTTP_HOST]";
-            header("Location: {$url}/dashboard");
-        } else {
-            $this->render('login', ['messages' => ['Wrong credentials!']]);
+        if ($user->getEmail() !== $email) {
+            $this->render('login', ['messages' => ['User with this email not exist!']]);
         }
 
+        if ($user->getPassword() !== $password) {
+            $this->render('login', ['messages' => ['Wrong password!']]);
+        }
 
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/menu");
     }
 
     public function register()
@@ -53,10 +59,10 @@ class SecurityController extends AppController
         }
 
         //TODO try to use better hash function
-        $user = new User($email, md5($password), $name, $surname);
+        $user = new User($email, md5($password), $name, $surname, $phone);
 
         $this->userRepository->addUser($user);
 
-        return $this->render('login', ['messages' => ['You\'ve been succesfully registrated!']]);
+        $this->render('login', ['messages' => ['You\'ve been succesfully registrated!']]);
     }
 }

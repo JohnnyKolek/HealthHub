@@ -13,7 +13,7 @@
 			</div>
 			<div class="action">
 				<a class="login" href="login">Login</a>
-				<a class="sign-up">Sign up</a>
+				<a class="sign-up" href="register">Sign up</a>
 			</div>
 		</div>
 	</body>

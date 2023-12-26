@@ -26,6 +26,7 @@ services:
     build: 
       context: .
       dockerfile: docker/db/Dockerfile
+    restart: always
     ports:
       - "5433:5432"
     networks:
