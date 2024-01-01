@@ -12,7 +12,7 @@
         <img src="./public/img/logo.svg" alt="Logo"/>
     </div>
     <div class="menu">
-        <a href="#">Book</a>
+        <a href="doctors">Book</a>
         <a href="#">Personal Data</a>
         <a href="index">Log out</a>
     </div>

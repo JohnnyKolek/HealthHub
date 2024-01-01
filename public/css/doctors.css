@@ -1,10 +1,10 @@
-body{
+body {
     margin: 0;
     display: flex;
     flex-direction: column;
 }
 
-nav{
+nav {
     max-height: 90px;
     background: #1F707B;
     width: 100%;
@@ -15,11 +15,8 @@ nav{
     position: fixed;
 }
 
-div.doctors{
-    margin-top: 100px;
-}
 
-nav ul{
+nav ul {
     display: flex;
     gap: 10vh;
     list-style-type: none;
@@ -27,70 +24,198 @@ nav ul{
     align-items: flex-end;
 }
 
-nav ul li{
+nav ul li {
     display: flex;
     flex-direction: column;
     font-family: Arial, Helvetica, sans-serif;
     color: white;
 }
 
-nav ul li:hover{
+nav ul li:hover {
     text-decoration: underline;
     cursor: pointer;
 }
 
-p{
+p {
     font-size: 1.3rem;
     margin: 0;
 }
 
-
-
-.logo img{
+.logo img {
     height: 80px;
     padding: 5px;
 }
 
-div.container{
+.logo img:hover {
+    cursor: pointer;
+}
+
+div.doctors {
+    margin: 100px 0;
+}
+
+div.container {
     display: flex;
     flex-direction: column;
 }
 
-div.doctor{
+.doctor {
     display: flex;
-    background-color: red;
+    flex-direction: column;
+    align-items: end;
+
+}
+
+button {
+    background-color: #1F707B;
+    width: 150px;
+    margin-right: 10vw;
+    color: white;
+    height: 40px;
+    border: none;
+    font-size: 14px;
+    border-radius: 13px;
+    text-transform: uppercase;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: #199A8E;
+}
+
+div.doctorCard {
+    display: flex;
+    background-color: #eee;
     width: 82vw;
     height: 40vh;
     margin: 5vh 9vw;
 }
 
-div.info{
+div.info {
+    display: flex;
+    flex-wrap: wrap;
     height: 100%;
     width: 40%;
-    background-color: #888;
+    background-color: #fff;
 }
 
-div.photo{
+.info p {
+    margin-top: 20px;
+}
+
+div.photo {
     width: 10vw;
-    height: 12vw;
+    height: 10vw;
     background-color: #fff;
     overflow: hidden;
-    border: 2px black solid;
+    /*border: 2px black solid;*/
     border-radius: 20px;
 }
 
-div.photo img{
+div.photo img {
     padding: 0;
     max-width: 100%;
 }
 
-p{
+.name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 16vh;
+    width: 22.5vw;
+}
+
+.name p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2vw;
+    text-transform: uppercase;
+}
+
+p {
     font-family: Arial, Helvetica, sans-serif;
     margin: 5px 0;
     font-size: 14px;
 }
 
-.days{
+.schedule {
     display: flex;
+    flex-direction: column;
+    width: 60%;
+    background-color: #fff;
 }
+
+.days {
+    height: 35%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+.day {
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    border: solid #BBB 1px;
+
+}
+
+.day:hover {
+    cursor: pointer;
+}
+
+.day div:nth-child(1) {
+    font-size: 14px;
+}
+
+.day div:nth-child(2) {
+    font-size: 24px;
+}
+
+
+.hours {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.hour {
+    width: 7vw;
+    text-align: center;
+    margin: 8px;
+    border: solid #BBB 1px;
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5vw;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    background-color: #fff;
+}
+
+.reserved {
+    border-color: #eee;
+    color: #eeeeee;
+}
+
+.selected {
+    border-color: #1F707B;
+    background-color: #1F707B;
+    color: white;
+}
+
+.hour:hover {
+    cursor: pointer;
+}
+
 

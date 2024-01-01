@@ -45,6 +45,7 @@ class SecurityController extends AppController
     {
         if (!$this->isPost()) {
             $this->render('register');
+            return;
         }
 
         $email = $_POST['email'];
@@ -63,6 +64,6 @@ class SecurityController extends AppController
 
         $this->userRepository->addUser($user);
 
-        $this->render('login', ['messages' => ['You\'ve been succesfully registrated!']]);
+        $this->render('login', ['messages' => ['You\'ve been successfully registered!']]);
     }
 }

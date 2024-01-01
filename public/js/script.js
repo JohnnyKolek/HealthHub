@@ -11,7 +11,7 @@ function arePasswordsSame(password, confirmedPassword) {
 }
 
 function markValidation(element, condition) {
-    !condition ? element.classList.add('no-valid') : element.classList.remove('no-valid');
+    !condition ? element.classList.add('not-valid') : element.classList.remove('not-valid');
 }
 
 function validateEmail() {
