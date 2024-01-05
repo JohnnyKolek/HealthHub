@@ -1,7 +1,7 @@
 <?php
 
 require_once 'Repository.php';
-require_once __DIR__.'/../models/User.php';
+require_once __DIR__.'/../models/Doctor.php';
 
 class UserRepository extends Repository
 {
@@ -71,5 +71,41 @@ class UserRepository extends Repository
 
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
         return $data['id'];
+    }
+
+    /**
+     * Retrieves all users with the 'doctor' role.
+     *
+     * @return User[]|null Array of User objects if found, null otherwise.
+     */
+    public function getDoctors(){
+        $role = 'doctor';
+        $stmt = $this->database->connect()->prepare('
+            SELECT u.id as id, ud.name as name, ud.surname as surname FROM users u
+            JOIN user_details ud ON u.user_details_id = ud.id 
+            JOIN public.user_roles ur on u.id = ur.user_id
+            JOIN public.roles r on r.id = ur.role_id
+            WHERE r.name = :role
+        ');
+        $stmt->bindParam(':role', $role, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $docs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+        if (!$docs) {
+            return null;
+        }
+
+        $doctors = [];
+        foreach ($docs as $doc) {
+            $doctors[] = new Doctor(
+                $doc['id'],
+                $doc['name'],
+                $doc['surname'],
+            );
+        }
+
+        return $doctors;
     }
 }

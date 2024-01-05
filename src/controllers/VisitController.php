@@ -4,9 +4,13 @@ require_once 'AppController.php';
 
 class VisitController extends AppController
 {
+
+    private UserRepository $userRepository;
+
     public function __construct()
     {
         parent::__construct();
+        $this->userRepository = new UserRepository();
     }
 
     public function doctors()
@@ -23,12 +27,24 @@ class VisitController extends AppController
         ];
 
         for ($i = 1; $i <= 6; $i++) {
-            $currentDate->add(new DateInterval('P1D')); // Add 1 day
+            $currentDate->add(new DateInterval('P1D'));
             $data['days'][] = [
                 'dayOfWeek' => $currentDate->format('l'),
                 'dayOfMonth' => $currentDate->format('j')
             ];
         }
+
+        $doctors = $this->userRepository->getDoctors();
+
+        foreach ($doctors as  $doctor) {
+            $data['doctors'][] =[
+                'name' => $doctor->getName(),
+                'surname' => $doctor->getSurname(),
+                'id' => $doctor->getId()
+            ];
+        }
+
+
 
         $this->render('doctors', $data);
     }
@@ -67,5 +83,11 @@ class VisitController extends AppController
     private function storeReservation($data)
     {
         return true;
+    }
+
+
+
+    public function confirm(){
+        $this->render('confirm');
     }
 }

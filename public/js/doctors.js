@@ -2,9 +2,6 @@ const element = document.querySelector(".days");
 
 let logo = document.querySelector(".logo");
 
-
-
-
 function handleTimeSlotClick(event) {
     const buttons = event.target.parentElement.getElementsByClassName('hour');
 
@@ -45,25 +42,18 @@ const submitButtons = document.querySelectorAll('.doctor button');
 
 submitButtons.forEach(function(button) {
     button.addEventListener('click', function() {
-        // Find the sibling .doctorCard that precedes the button
-        var doctorCard = button.previousElementSibling;
+        let doctorCard = button.previousElementSibling;
 
-        // Assuming the .doctorCard is the immediate sibling, we proceed
         if (doctorCard && doctorCard.classList.contains('doctorCard')) {
-            // Find the selected day and hour within this doctorCard
-            var selectedDayDiv = doctorCard.querySelector('.days .selected');
-            var selectedHour = doctorCard.querySelector('.hours .selected');
+            let selectedDayDiv = doctorCard.querySelector('.days .selected');
+            let selectedHour = doctorCard.querySelector('.hours .selected');
 
-            // Check if a day and hour are selected
             if (selectedDayDiv && selectedHour) {
-                // Get the individual parts of the day selection
-                var dayOfWeek = selectedDayDiv.children[0].textContent.trim();
-                var dateOfMonth = selectedDayDiv.children[1].textContent.trim();
+                let dayOfWeek = selectedDayDiv.children[0].textContent.trim();
+                let dateOfMonth = selectedDayDiv.children[1].textContent.trim();
 
-                // Get the text content of the selected hour
-                var hourText = selectedHour.textContent.trim();
+                let hourText = selectedHour.textContent.trim();
 
-                // Log the results to the console
                 console.log('Selected Appointment:', dayOfWeek, dateOfMonth, hourText);
             } else {
                 console.log('Please select a day and time for the appointment.');
@@ -71,6 +61,8 @@ submitButtons.forEach(function(button) {
         } else {
             console.log('DoctorCard sibling not found for this button');
         }
+
+        // window.location.href = '/confirm';
     });
 });
 
@@ -79,7 +71,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var logo = document.querySelector('.logo img'); // Select the logo image
 
     logo.addEventListener('click', function() {
-        // Redirect to the /menu endpoint
         window.location.href = '/menu';
     });
 });

@@ -13,6 +13,8 @@ Router::get('menu', 'DefaultController');
 Router::get('fileNotFound', 'ErrorController');
 Router::get('register', 'SecurityController');
 Router::get('doctors', 'VisitController');
+Router::get('getDoctors', 'DoctorController');
+Router::get('confirm', 'VisitController');
 
 
 Router::run($path);

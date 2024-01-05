@@ -21,7 +21,7 @@ class SecurityController extends AppController
         }
 
         $email = $_POST['email'];
-        $password = md5($_POST['password']);
+        $password = ($_POST['password']);
 
         $user = $this->userRepository->getUser($email);
 
@@ -33,7 +33,7 @@ class SecurityController extends AppController
             $this->render('login', ['messages' => ['User with this email not exist!']]);
         }
 
-        if ($user->getPassword() !== $password) {
+        if (!password_verify($password, $user->getPassword())) {
             $this->render('login', ['messages' => ['Wrong password!']]);
         }
 
@@ -59,8 +59,7 @@ class SecurityController extends AppController
             $this->render('register', ['messages' => ['Please provide proper password']]);
         }
 
-        //TODO try to use better hash function
-        $user = new User($email, md5($password), $name, $surname, $phone);
+        $user = new User($email, password_hash($password, PASSWORD_DEFAULT), $name, $surname, $phone);
 
         $this->userRepository->addUser($user);
 

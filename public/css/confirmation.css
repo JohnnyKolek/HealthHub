@@ -1,0 +1,24 @@
+body{
+    margin: 0;
+}
+
+.container{
+    display: flex;
+    background: #1F707B;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.confirmation{
+    display: flex;
+    flex-direction: column;
+    border-radius: 5vw;
+    background: #fff;
+    width: 50vw;
+    height: 50vw;
+    align-items: center;
+    justify-content: center;
+    gap: 10vh;
+}
