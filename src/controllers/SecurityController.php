@@ -18,6 +18,7 @@ class SecurityController extends AppController
 
         if (!$this->isPost()) {
             $this->render('login');
+            return;
         }
 
         $email = $_POST['email'];
