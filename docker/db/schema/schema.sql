@@ -42,3 +42,9 @@ CREATE TABLE user_roles
     FOREIGN KEY (role_id) REFERENCES roles (id)
 );
 
+INSERT INTO roles (id, name)
+VALUES (1, 'doctor'),
+       (2, 'patient'),
+       (3, 'admin')
+ON CONFLICT (id) DO NOTHING;
+
