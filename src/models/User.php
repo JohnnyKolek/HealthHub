@@ -1,6 +1,7 @@
 <?php
 
 class User {
+    private $id;
     private $email;
     private $password;
     private $name;
@@ -8,14 +9,16 @@ class User {
     private $phone;
 
     /**
+     * @param $id
      * @param $email
      * @param $password
      * @param $name
      * @param $surname
      * @param $phone
      */
-    public function __construct($email, $password, $name, $surname, $phone)
+    public function __construct($id, $email, $password, $name, $surname, $phone)
     {
+        $this->id = $id;
         $this->email = $email;
         $this->password = $password;
         $this->name = $name;
@@ -23,6 +26,13 @@ class User {
         $this->phone = $phone;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     public function getEmail(): string 
     {
@@ -51,8 +61,4 @@ class User {
     {
         return $this->phone;
     }
-
-
-
-
 }

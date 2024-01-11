@@ -21,7 +21,7 @@
 <div class="doctors">
     <div class="container">
         <?php
-        if (isset($doctors)) {
+        if (isset($doctors) && $doctors != null) {
             foreach ($doctors as $doctor): ?>
                 <div class="doctor">
                     <div class="doctorCard">

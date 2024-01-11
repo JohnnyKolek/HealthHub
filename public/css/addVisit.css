@@ -1,0 +1,117 @@
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+nav {
+    max-height: 90px;
+    background: #1F707B;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 0 300px;
+    gap: 10vh;
+    position: fixed;
+}
+
+
+nav ul {
+    display: flex;
+    gap: 10vh;
+    list-style-type: none;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+nav ul li {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+nav ul li:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+a {
+    color: #fff;
+    font-size: 1.1rem;
+    margin: 0;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.logo img {
+    height: 80px;
+    padding: 5px;
+}
+
+.logo img:hover {
+    cursor: pointer;
+}
+
+main {
+    text-transform: uppercase;
+    width: 100%;
+    margin: 100px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+form {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 10vh;
+}
+
+
+div.input {
+    display: flex;
+    flex-direction: column;
+    gap: 7vh;
+}
+
+input {
+    text-transform: uppercase;
+    height: 50px;
+    border-radius: 12px;
+    width: 20vw;
+    border: 1px solid #E5E7EB;
+    background: #F9FAFB;
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    text-align: center;
+}
+
+form h1{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+form button{
+    box-sizing: border-box;
+    color: white;
+    background-color: #199A8E;
+    width: 20vw;
+    height: 50px;
+    border-radius: 12px;
+    line-height: 30px;
+    border: none;
+    font-size: 1rem;
+    padding: 7px 0;
+}
+
+button:hover{
+    cursor: pointer;
+}

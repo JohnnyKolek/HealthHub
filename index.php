@@ -15,6 +15,9 @@ Router::get('register', 'SecurityController');
 Router::get('doctors', 'VisitController');
 Router::get('getDoctors', 'DoctorController');
 Router::get('confirm', 'VisitController');
+Router::get('addVisit', 'DoctorController');
+Router::get('doctorVisits', 'DoctorController');
+Router::get('addVisit', 'DoctorController');
 
 
 Router::run($path);

@@ -5,12 +5,14 @@ require_once 'AppController.php';
 class VisitController extends AppController
 {
 
+    private VisitRepository $visitRepository;
     private UserRepository $userRepository;
 
     public function __construct()
     {
         parent::__construct();
         $this->userRepository = new UserRepository();
+        $this->visitRepository = new VisitRepository();
     }
 
     public function doctors()
@@ -36,12 +38,14 @@ class VisitController extends AppController
 
         $doctors = $this->userRepository->getDoctors();
 
-        foreach ($doctors as  $doctor) {
-            $data['doctors'][] =[
-                'name' => $doctor->getName(),
-                'surname' => $doctor->getSurname(),
-                'id' => $doctor->getId()
-            ];
+        if ($doctors != null) {
+            foreach ($doctors as $doctor) {
+                $data['doctors'][] = [
+                    'name' => $doctor->getName(),
+                    'surname' => $doctor->getSurname(),
+                    'id' => $doctor->getId()
+                ];
+            }
         }
 
 
@@ -90,4 +94,7 @@ class VisitController extends AppController
     public function confirm(){
         $this->render('confirm');
     }
+
+
+
 }

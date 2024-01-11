@@ -19,6 +19,4 @@ class DefaultController extends AppController {
         $this->render('menu');
     }
 
-
-
 }

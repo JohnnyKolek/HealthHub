@@ -38,8 +38,18 @@ class SecurityController extends AppController
             $this->render('login', ['messages' => ['Wrong password!']]);
         }
 
+        session_start();
+        $_SESSION['user_id'] = $user->getId();
+
+        $role = $this->userRepository->getUserRole($user->getId());
         $url = "http://$_SERVER[HTTP_HOST]";
-        header("Location: {$url}/menu");
+        error_log($role);
+        if ($role === 'doctor'){
+            header("Location: {$url}/addVisit");
+        }
+        else {
+            header("Location: {$url}/menu");
+        }
     }
 
     public function register()
@@ -60,10 +70,12 @@ class SecurityController extends AppController
             $this->render('register', ['messages' => ['Please provide proper password']]);
         }
 
-        $user = new User($email, password_hash($password, PASSWORD_DEFAULT), $name, $surname, $phone);
+        $user = new User(null,$email, password_hash($password, PASSWORD_DEFAULT), $name, $surname, $phone);
 
         $this->userRepository->addUser($user);
 
         $this->render('login', ['messages' => ['You\'ve been successfully registered!']]);
     }
+
+
 }
