@@ -25,7 +25,7 @@
                 foreach ($visits as $visit): ?>
             <li>
                 <div><?=$visit->getDate() ?></div>
-                <div>Patient</div>
+                <div><?=$visit->getPatient()?></div>
             </li>
                 <?php endforeach;
             }

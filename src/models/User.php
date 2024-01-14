@@ -7,6 +7,27 @@ class User {
     private $name;
     private $surname;
     private $phone;
+    private $role;
+
+    /**
+     * @param $id
+     * @param $email
+     * @param $password
+     * @param $name
+     * @param $surname
+     * @param $phone
+     * @param $role
+     */
+    public function __construct($id, $email, $password, $name, $surname, $phone, $role)
+    {
+        $this->id = $id;
+        $this->email = $email;
+        $this->password = $password;
+        $this->name = $name;
+        $this->surname = $surname;
+        $this->phone = $phone;
+        $this->role = $role;
+    }
 
     /**
      * @param $id
@@ -16,15 +37,7 @@ class User {
      * @param $surname
      * @param $phone
      */
-    public function __construct($id, $email, $password, $name, $surname, $phone)
-    {
-        $this->id = $id;
-        $this->email = $email;
-        $this->password = $password;
-        $this->name = $name;
-        $this->surname = $surname;
-        $this->phone = $phone;
-    }
+
 
     /**
      * @return mixed
@@ -61,4 +74,14 @@ class User {
     {
         return $this->phone;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+
 }

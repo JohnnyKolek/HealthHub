@@ -39,6 +39,22 @@ nav ul li:hover {
     cursor: pointer;
 }
 
+h1{
+    text-align: center;
+}
+
+.messages{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.message{
+    text-align: center;
+    font-size: 12px;
+}
+
 
 a {
     color: #fff;
