@@ -38,6 +38,10 @@ class DoctorController extends AppController
     {
         $visits = $this->visitRepository->getVisits();
 
+        foreach ($visits as $visit) {
+            $visit->getDate();
+        }
+
 
         $this->render("doctorVisits", ['visits' => $visits]);
     }

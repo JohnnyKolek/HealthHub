@@ -104,6 +104,6 @@ li div{
 }
 
 li div:first-child{
-    background-color: #1F707B;
-
+    background-color: #199A8E;
+    width: 30%;
 }
