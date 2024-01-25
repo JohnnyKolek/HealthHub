@@ -25,6 +25,9 @@ function handleDaySlotClick(event) {
         hourButtons[i].classList.remove('selected');
     }
     event.currentTarget.classList.add('selected');
+
+    const hours = event.currentTarget.closest('.hours');
+
 }
 
 
@@ -68,7 +71,7 @@ submitButtons.forEach(function(button) {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    var logo = document.querySelector('.logo img'); // Select the logo image
+    const logo = document.querySelector('.logo img');
 
     logo.addEventListener('click', function() {
         window.location.href = '/menu';

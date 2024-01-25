@@ -19,6 +19,7 @@ Router::get('confirm', 'VisitController');
 Router::get('addVisit', 'DoctorController');
 Router::get('doctorVisits', 'DoctorController');
 Router::get('addVisit', 'DoctorController');
+Router::get('doctorMenu', 'DoctorController');
 
 
 Router::run($path);

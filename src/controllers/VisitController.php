@@ -53,47 +53,8 @@ class VisitController extends AppController
         $this->render('doctors', $data);
     }
 
-    public function reserveVisit()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $data = $_POST;
 
-            if ($this->isValidReservation($data)) {
-                $reservationCreated = $this->storeReservation($data);
-
-                if ($reservationCreated) {
-                    $this->render('reservation_success');
-                } else {
-                    $this->render('reservation_error');
-                }
-            } else {
-                $this->render('reservation_form', [
-                    'error' => 'Invalid reservation data.',
-                    'formData' => $data
-                ]);
-            }
-        } else {
-            $this->render('reservation_form', [
-                'error' => 'Please submit the form with valid data.'
-            ]);
-        }
-    }
-
-    private function isValidReservation($data)
-    {
-        return true;
-    }
-
-    private function storeReservation($data)
-    {
-        return true;
-    }
-
-
-
-    public function confirm(){
-        $this->render('confirm');
-    }
+//    public function searchVisits()
 
 
 

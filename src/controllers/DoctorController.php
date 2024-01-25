@@ -17,20 +17,42 @@ class DoctorController extends AppController
 
     public function addVisit(): void
     {
-        if (!$this->isPost()) {
-            $this->render('addVisit');
+        session_start();
+        $role = $_SESSION['user_role'];
+        if ($role !== 'doctor') {
+            $this->render('error');
             return;
         }
 
-        $date = $_POST['date'];
-        $hour = ($_POST['hour']);
 
-        session_start();
+            if (!$this->isPost()) {
+                $this->render('addVisit');
+                return;
+            }
 
-        $dateTime = $date . ' ' . $hour;
-        $this->visitRepository->addVisit(new Visit(null, $_SESSION['user_id'], null, $dateTime, false));
-        $this->render('addVisit', ['messages' => ['Visit was successfully added']]);
+            $date = $_POST['date'];
+            $hour = ($_POST['hour']);
 
+            session_start();
+
+            $dateTime = $date . ' ' . $hour;
+
+            $format = 'Y-m-d H:i';
+
+            $dt = DateTime::createFromFormat($format, $dateTime);
+            if ($dt === false) {
+                $this->render('addVisit', ['messages' => ['Incorrect Date or Time']]);
+            } else {
+                $this->visitRepository->addVisit(new Visit(null, $_SESSION['user_id'], null, $dateTime, false));
+                $this->render('addVisit', ['messages' => ['Visit was successfully added']]);
+            }
+
+
+    }
+
+
+    public function doctorMenu(){
+        $this->render('doctorMenu');
     }
 
 

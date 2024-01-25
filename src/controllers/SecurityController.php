@@ -40,19 +40,19 @@ class SecurityController extends AppController
 
         session_start();
         $_SESSION['user_id'] = $user->getId();
+        $_SESSION['user_role'] = $user->getRole();
 
-        $role = $this->userRepository->getUserRole($user->getId());
         $url = "http://$_SERVER[HTTP_HOST]";
-        error_log($role);
-        if ($role === 'doctor'){
-            header("Location: {$url}/addVisit");
+        error_log($user->getRole());
+        if ($user->getRole() === 'doctor'){
+            header("Location: {$url}/doctorMenu");
         }
         else {
             header("Location: {$url}/menu");
         }
     }
 
-    public function register()
+    public function register(): void
     {
         if (!$this->isPost()) {
             $this->render('register');
@@ -70,7 +70,7 @@ class SecurityController extends AppController
             $this->render('register', ['messages' => ['Please provide proper password']]);
         }
 
-        $user = new User(null,$email, password_hash($password, PASSWORD_DEFAULT), $name, $surname, $phone);
+        $user = new User(null,$email, password_hash($password, PASSWORD_DEFAULT), $name, $surname, $phone, null);
 
         $this->userRepository->addUser($user);
 
@@ -80,7 +80,6 @@ class SecurityController extends AppController
 
     public function logout(){
         session_start();
-        session_unset();
         session_destroy();
         $this->render('index');
     }
