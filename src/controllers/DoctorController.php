@@ -47,7 +47,11 @@ class DoctorController extends AppController
             if ($dt === false) {
                 $this->render('addVisit', ['messages' => ['Incorrect Date or Time']]);
             } else {
-                $this->visitRepository->addVisit(new Visit(null, $_SESSION['user_id'], null, $dateTime, false));
+                try {
+                    $this->visitRepository->addVisit(new Visit(null, $_SESSION['user_id'], null, $dateTime, false));
+                } catch (Exception $e){
+                    $this->render('addVisit', ['messages' => [$e->getMessage()]]);
+                }
                 $this->render('addVisit', ['messages' => ['Visit was successfully added']]);
             }
 

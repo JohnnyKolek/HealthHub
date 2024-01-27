@@ -30,6 +30,30 @@ function handleDaySlotClick(event) {
 
     console.log(date);
 
+    const doctor = event.currentTarget.closest('.doctor');
+    console.log(doctor);
+
+    fetch('/getVisitsByDateAndDoctor', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({date: date, doctor: doctor.id})
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log(response);
+            return response.json();
+        })
+        .then(data => {
+            updateVisitsDisplay(data, doctor);
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+        });
+
 
     const hourButtons = doctorCard.getElementsByClassName('hour');
     for (let i = 0; i < hourButtons.length; i++) {
@@ -38,6 +62,29 @@ function handleDaySlotClick(event) {
     event.currentTarget.classList.add('selected');
 
     const hours = event.currentTarget.closest('.hours');
+
+}
+
+function updateVisitsDisplay(visitsData, doctor) {
+
+    const hoursContainer = doctor.querySelector(".hours");
+
+    console.log(hoursContainer);
+    hoursContainer.innerHTML = "";
+
+    visitsData.forEach(visit => {
+        const hourElement = document.createElement('div');
+        hourElement.classList.add("hour");
+        hourElement.id = visit.id;
+        const date = new Date(visit.date);
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+        const formattedHours = hours.toString().padStart(2, '0');
+        const formattedMinutes = minutes.toString().padStart(2, '0');
+        hourElement.textContent = `${formattedHours}:${formattedMinutes}`;
+        hourElement.addEventListener('click', handleTimeSlotClick);
+        hoursContainer.appendChild(hourElement)
+    })
 
 }
 
@@ -63,12 +110,30 @@ submitButtons.forEach(function (button) {
             let selectedHour = doctorCard.querySelector('.hours .selected');
 
             if (selectedDayDiv && selectedHour) {
-                let dayOfWeek = selectedDayDiv.children[0].textContent.trim();
-                let dateOfMonth = selectedDayDiv.children[1].textContent.trim();
+                console.log(selectedHour.id);
 
-                let hourText = selectedHour.textContent.trim();
+                fetch('/reserveVisit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({id: selectedHour.id})
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        console.log(response);
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log(data);
+                        //TODO add redirection
+                    })
+                    .catch(error => {
+                        console.error('There has been a problem with your fetch operation:', error);
+                    });
 
-                console.log('Selected Appointment:', dayOfWeek, dateOfMonth, hourText);
             } else {
                 console.log('Please select a day and time for the appointment.');
             }
@@ -76,7 +141,7 @@ submitButtons.forEach(function (button) {
             console.log('DoctorCard sibling not found for this button');
         }
 
-        // window.location.href = '/confirm';
+        // window.location.href = `/confirm?id=${}`;
     });
 });
 

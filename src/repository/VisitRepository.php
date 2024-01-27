@@ -14,7 +14,7 @@ class VisitRepository extends Repository
             SELECT v.id as id, doctor, patient, name, surname, date_time, completed FROM visits as v
             LEFT JOIN public.users u on u.id = v.patient
             LEFT JOIN public.user_details ud on ud.id = u.user_details_id
-             WHERE doctor=:id and date(date_time) = current_date                                                                       
+            WHERE doctor=:id and date(date_time) = current_date                                                                       
             ORDER BY date_time;
         ');
 
@@ -69,18 +69,105 @@ class VisitRepository extends Repository
         return $result;
     }
 
+    public function getVisitsByDateAndDoctorId(string  $date, int $id): array
+    {
+        $result = [];
+
+        $stmt = $this->database->connect()->prepare("
+            SELECT v.id as id, doctor, patient, date_time, completed FROM visits as v
+            WHERE doctor=:id AND date(date_time) = :date AND patient IS NULL 
+            ORDER BY date_time;
+        ");
+
+
+        error_log($date);
+        session_start();
+        $stmt->bindParam(':id', $id, PDO::PARAM_STR);
+        $stmt->bindParam(':date', $date, PDO::PARAM_STR);
+        $stmt->execute();
+        $visits = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($visits as $visit) {
+            $result[] = new Visit(
+                $visit['id'],
+                $visit['doctor'],
+                $visit['patient'] == null ? '' : $visit['patient'],
+                $visit['date_time'],
+                $visit['completed'],
+            );
+        }
+
+        return $result;
+    }
 
     public function addVisit($visit): void
     {
-        $stmt = $this->database->connect()->prepare('
+
+        $connection = $this->database->connect();
+        $connection->beginTransaction();
+
+        try {
+
+            $stmt = $this->database->connect()->prepare('
+                SELECT COUNT(*) FROM visits WHERE doctor=:doctor AND date_time=:date
+            ');
+
+            $stmt->execute([
+                $visit->getDoctor(),
+                $visit->getDate()
+            ]);
+
+            $exists = $stmt->fetchColumn() > 0;
+
+            if ($exists){
+                throw new Exception('Visits already exists!');
+            }
+
+            $stmt = $this->database->connect()->prepare('
              INSERT INTO visits(doctor, date_time, completed)
              VALUES(?, ?, ?)
         ');
 
-        $stmt->execute([
-            $visit->getDoctor(),
-            $visit->getDate(),
-            'false'
-        ]);
+            $stmt->execute([
+                $visit->getDoctor(),
+                $visit->getDate(),
+                'false'
+            ]);
+        }catch (Exception $e){
+            $connection->rollBack();
+            throw $e;
+        }
     }
+
+
+    public function reserveVisit($id, $patient){
+
+
+
+
+        $stmt = $this->database->connect()->prepare('
+             SELECT COUNT(*) FROM visits
+             WHERE id=:id;
+        ');
+
+        $exists = $stmt->fetchColumn() > 0;
+
+        if ($exists){
+            throw new Exception('Visits already reserved!');
+        }
+
+        $stmt = $this->database->connect()->prepare('
+             UPDATE visits
+             SET patient=:patientId
+             WHERE id=:id;
+        ');
+
+        $stmt->execute([
+            $patient,
+            $id
+        ]);
+
+    }
+
+
 }

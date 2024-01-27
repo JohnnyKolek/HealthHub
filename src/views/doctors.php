@@ -23,7 +23,7 @@
         <?php
         if (isset($doctors) && $doctors != null) {
             foreach ($doctors as $doctor): ?>
-                <div class="doctor">
+                <div class="doctor" id="<?=$doctor['id']?>">
                     <div class="doctorCard">
                         <div class="info">
                             <div class="photo"><img src="public/img/doctor<?= $doctor['id'] ?>.jpg" alt=""/></div>
@@ -64,7 +64,7 @@
 </body>
 </html>
 
-<template>
+<template id="hours-template">
     <div class="hours">
     </div>
 </template>

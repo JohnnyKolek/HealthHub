@@ -22,5 +22,8 @@ Router::get('getVisitsByDate', 'DoctorController');
 Router::get('addVisit', 'DoctorController');
 Router::get('doctorMenu', 'DoctorController');
 
+Router::post('getVisitsByDateAndDoctor', 'VisitController');
+Router::post('reserveVisit', 'VisitController');
+
 
 Router::run($path);

@@ -53,8 +53,45 @@ class VisitController extends AppController
         }
 
 
-
         $this->render('doctors', $data);
+    }
+
+    public function getVisitsByDateAndDoctor()
+    {
+
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+
+        if ($contentType === "application/json") {
+            $content = trim(file_get_contents("php://input"));
+            $decoded = json_decode($content, true);
+
+            header('Content-type: application/json');
+            http_response_code(200);
+
+            $visits = $this->visitRepository->getVisitsByDateAndDoctorId($decoded['date'], $decoded['doctor']);
+
+            $json = json_encode($visits);
+            echo $json;
+            error_log($json);
+        }
+    }
+
+    public function reserveVisit()
+    {
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+
+        if ($contentType === "application/json") {
+            $content = trim(file_get_contents("php://input"));
+            $decoded = json_decode($content, true);
+
+            header('Content-type: application/json');
+            http_response_code(200);
+
+            session_start();
+
+            $this->visitRepository->reserveVisit($decoded['id'], $_SESSION['user_id']);
+
+        }
     }
 
 }
