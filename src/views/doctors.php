@@ -13,9 +13,9 @@
         <img src="./public/img/logo.svg" alt=""/>
     </div>
     <ul>
-        <li><p>Doctors</p></li>
-        <li><p>Personal Data</p></li>
-        <li><p>Logout</p></li>
+        <li><a href="#">Doctors</a></li>
+        <li><a href="#">Personal Data</a></li>
+        <li><a href="logout">logout</a></li>
     </ul>
 </nav>
 <div class="doctors">
@@ -45,30 +45,14 @@
                                         <div class="day">
                                             <div><?= $day['dayOfWeek']; ?></div>
                                             <div><?= $day['dayOfMonth']; ?></div>
+                                            <div><?= $day['monthNumeric']; ?></div>
+                                            <div><?= $day['year']; ?></div>
                                         </div>
                                     <?php endforeach;
                                 }
                                 ?>
                             </div>
                             <div class="hours">
-                                <div class="hour">9:00</div>
-                                <div class="hour">9:30</div>
-                                <div class="hour">10:00</div>
-                                <div class="hour">10:30</div>
-                                <div class="hour">11:00</div>
-                                <div class="hour">11:30</div>
-                                <div class="hour">12:00</div>
-                                <div class="hour">12:30</div>
-                                <div class="hour">13:00</div>
-                                <div class="hour">13:30</div>
-                                <div class="hour">14:00</div>
-                                <div class="hour">14:30</div>
-                                <div class="hour">15:00</div>
-                                <div class="hour">15:30</div>
-                                <div class="hour">16:00</div>
-                                <div class="hour">16:30</div>
-                                <div class="hour">17:00</div>
-                                <div class="hour">17:30</div>
                             </div>
                         </div>
                     </div>
@@ -79,3 +63,8 @@
     </div>
 </body>
 </html>
+
+<template>
+    <div class="hours">
+    </div>
+</template>

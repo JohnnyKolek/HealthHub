@@ -18,6 +18,11 @@ class DoctorController extends AppController
     public function addVisit(): void
     {
         session_start();
+        if (!isset($_SESSION)){
+            $this->render("error");
+            return;
+        }
+
         $role = $_SESSION['user_role'];
         if ($role !== 'doctor') {
             $this->render('error');
@@ -33,7 +38,6 @@ class DoctorController extends AppController
             $date = $_POST['date'];
             $hour = ($_POST['hour']);
 
-            session_start();
 
             $dateTime = $date . ' ' . $hour;
 
@@ -56,6 +60,25 @@ class DoctorController extends AppController
     }
 
 
+    public function getVisitsByDate()
+    {
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+
+        if ($contentType === "application/json"){
+            $content  = trim(file_get_contents("php://input"));
+            $decoded = json_decode($content, true);
+
+            header('Content-type: application/json');
+            http_response_code(200);
+
+            $visits = $this->visitRepository->getVisitsByDate($decoded['date']);
+            $json = json_encode($visits);
+            echo $json;
+            error_log($json);
+        }
+
+    }
+
     public function doctorVisits()
     {
         $visits = $this->visitRepository->getVisits();
@@ -67,10 +90,4 @@ class DoctorController extends AppController
 
         $this->render("doctorVisits", ['visits' => $visits]);
     }
-
-//    public function doctorVisits(){
-//        header('Content-type: application/json');
-//        http_response_code(200);
-//        echo json_encode($this->visitRepository->getVisits());
-//    }
 }

@@ -1,6 +1,6 @@
 <?php
 
-class Visit
+class Visit implements JsonSerializable
 {
     private $id;
     private $doctor;
@@ -63,6 +63,14 @@ class Visit
     }
 
 
-
-
+    public function jsonSerialize(): mixed
+    {
+        return [
+            'id' => $this->id,
+            'doctor' => $this->doctor,
+            'patient' => $this->patient,
+            'date' => $this->date,
+            'completed' => $this->completed
+        ];
+    }
 }

@@ -4,6 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="/public/css/addVisit.css"/>
+    <script type="text/javascript" src="./public/js/addVisit.js" defer></script>
     <title>Doctor Dashboard</title>
 </head>
 <body>

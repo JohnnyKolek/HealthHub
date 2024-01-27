@@ -25,14 +25,18 @@ class VisitController extends AppController
 
         $data['days'][] = [
             'dayOfWeek' => $currentDate->format('l'),
-            'dayOfMonth' => $currentDate->format('j')
+            'dayOfMonth' => $currentDate->format('j'),
+            'monthNumeric' => $currentDate->format('m'),
+            'year' => $currentDate->format('Y')
         ];
 
         for ($i = 1; $i <= 6; $i++) {
             $currentDate->add(new DateInterval('P1D'));
             $data['days'][] = [
                 'dayOfWeek' => $currentDate->format('l'),
-                'dayOfMonth' => $currentDate->format('j')
+                'dayOfMonth' => $currentDate->format('j'),
+                'monthNumeric' => $currentDate->format('m'),
+                'year' => $currentDate->format('Y')
             ];
         }
 
@@ -52,10 +56,5 @@ class VisitController extends AppController
 
         $this->render('doctors', $data);
     }
-
-
-//    public function searchVisits()
-
-
 
 }

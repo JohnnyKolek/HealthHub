@@ -20,6 +20,17 @@ function handleDaySlotClick(event) {
         dayButtons[i].classList.remove('selected');
     }
 
+    console.log(event.currentTarget.querySelector("div:nth-child(2)").innerHTML);
+    console.log(event.currentTarget.querySelector("div:nth-child(3)").innerHTML);
+    console.log(event.currentTarget.querySelector("div:nth-child(4)").innerHTML);
+
+    const date = event.currentTarget.querySelector("div:nth-child(4)").innerHTML + '-'
+        + event.currentTarget.querySelector("div:nth-child(3)").innerHTML + '-'
+        + event.currentTarget.querySelector("div:nth-child(2)").innerHTML;
+
+    console.log(date);
+
+
     const hourButtons = doctorCard.getElementsByClassName('hour');
     for (let i = 0; i < hourButtons.length; i++) {
         hourButtons[i].classList.remove('selected');
@@ -43,8 +54,8 @@ for (let i = 0; i < daySlots.length; i++) {
 
 const submitButtons = document.querySelectorAll('.doctor button');
 
-submitButtons.forEach(function(button) {
-    button.addEventListener('click', function() {
+submitButtons.forEach(function (button) {
+    button.addEventListener('click', function () {
         let doctorCard = button.previousElementSibling;
 
         if (doctorCard && doctorCard.classList.contains('doctorCard')) {
@@ -70,10 +81,10 @@ submitButtons.forEach(function(button) {
 });
 
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const logo = document.querySelector('.logo img');
 
-    logo.addEventListener('click', function() {
+    logo.addEventListener('click', function () {
         window.location.href = '/menu';
     });
 });

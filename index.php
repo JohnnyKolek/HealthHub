@@ -18,6 +18,7 @@ Router::get('getDoctors', 'DoctorController');
 Router::get('confirm', 'VisitController');
 Router::get('addVisit', 'DoctorController');
 Router::get('doctorVisits', 'DoctorController');
+Router::get('getVisitsByDate', 'DoctorController');
 Router::get('addVisit', 'DoctorController');
 Router::get('doctorMenu', 'DoctorController');
 

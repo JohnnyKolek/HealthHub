@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    let logo = document.querySelector('.logo img'); // Select the logo image
+    let logo = document.querySelector('.logo img');
 
     logo.addEventListener('click', function() {
         window.location.href = '/doctorMenu';

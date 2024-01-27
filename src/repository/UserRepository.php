@@ -142,8 +142,8 @@ class UserRepository extends Repository
     {
         $stmt = $this->database->connect()->prepare('
             SELECT r.name as name FROM public.user_roles 
-            join public.roles r on user_roles.role_id = r.id
-            where user_roles.user_id = :id
+            JOIN public.roles r on user_roles.role_id = r.id
+            WHERE user_roles.user_id = :id
         ');
 
         $stmt->bindParam(':id', $userId, PDO::PARAM_STR);
