@@ -31,8 +31,12 @@
                 }
                 ?>
             </div>
-            <input name="date" type="text" placeholder="date in format YYYY-MM-DD">
-            <input name="hour" type="text" placeholder="hour in format HH:mm">
+            <label>
+                <input name="date" type="date">
+            </label>
+            <label>
+                <input name="hour" type="time">
+            </label>
         </div>
         <button type="submit">ADD</button>
     </form>
