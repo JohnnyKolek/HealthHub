@@ -1,5 +1,3 @@
-const element = document.querySelector(".days");
-
 let logo = document.querySelector(".logo");
 
 function handleTimeSlotClick(event) {
@@ -54,15 +52,11 @@ function handleDaySlotClick(event) {
             console.error('There has been a problem with your fetch operation:', error);
         });
 
-
     const hourButtons = doctorCard.getElementsByClassName('hour');
     for (let i = 0; i < hourButtons.length; i++) {
         hourButtons[i].classList.remove('selected');
     }
     event.currentTarget.classList.add('selected');
-
-    const hours = event.currentTarget.closest('.hours');
-
 }
 
 function updateVisitsDisplay(visitsData, doctor) {
@@ -128,23 +122,25 @@ submitButtons.forEach(function (button) {
                     })
                     .then(data => {
                         console.log(data);
-                        //TODO add redirection
+                        if (data.response === 'Visit already reserved!') {
+                            window.location.href = `/confirm?message=Visit already reserved!`
+                        } else if (data.response === 'Visit successfully reserved') {
+                            window.location.href = `/confirm?message=Visit successfully reserved&id=${data.id}`
+                        }
                     })
                     .catch(error => {
                         console.error('There has been a problem with your fetch operation:', error);
                     });
 
             } else {
-                console.log('Please select a day and time for the appointment.');
+                alert('Please select day and time of the appointment.');
             }
         } else {
             console.log('DoctorCard sibling not found for this button');
         }
 
-        // window.location.href = `/confirm?id=${}`;
     });
 });
-
 
 document.addEventListener('DOMContentLoaded', function () {
     const logo = document.querySelector('.logo img');

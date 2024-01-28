@@ -170,10 +170,6 @@ class VisitRepository extends Repository
              WHERE id=:id;
         ');
 
-        $stmt->execute([
-            $patient,
-            $id
-        ]);
             $stmt->execute([
                 $patient,
                 $id
@@ -211,6 +207,18 @@ class VisitRepository extends Repository
         return $result;
     }
 
+
+    public function getPatientVisits(): array
+    {
+        $result = [];
+
+        $stmt = $this->database->connect()->prepare('
+            SELECT v.id as id, doctor, patient, name, surname, date_time, completed FROM visits as v
+            LEFT JOIN public.users u on u.id = v.doctor
+            LEFT JOIN public.user_details ud on ud.id = u.user_details_id
+            WHERE patient=:id                                                                      
+            ORDER BY date_time;
+        ');
 
     }
 
