@@ -1,33 +1,53 @@
-# Project Title
-
-A brief description of your project goes here.
+# Helthub 
 
 ## Table of Contents
 
 - [Introduction](#introduction)
 - [Features](#features)
 - [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+- [Technologies](#technologies)
+- [Database Diagram](#database-diagram)
+
 
 ## Introduction
 
-Explain what your project is about and what it does.
+Helthub is web app for managing work of clinics. It allows patient to book visits without leaving home or trying to call in the clinic for hours. It's purpose is to streamline the process of scheduling medical visits. App has two types of users: Patient and Doctor, Doctor can create and manage potential visits, patient can get an appontment and check scheduled apoointments. 
 
 ## Features
 
-List the key features of your project.
-
-- Feature 1
-- Feature 2
-- Feature 3
+- Reserving visits in clinic
+- Monitoring your visits
+- Managing visits by doctor
 
 ## Installation
 
-Provide instructions on how to install your project. You can use code blocks to show commands.
+Pre-requisites:
+- docker installed
 
-```bash
-git clone https://github.com/your/repository.git
-cd your-project-directory
-npm install
+Run the following commands in the root directory of the project:
+
+```docker compose up```
+
+Or if you want to run it in the background:
+
+```docker compose up -d```
+
+## Technologies
+
+- Frontend
+    - HTML 5
+    - CSS 3
+    - vanilla Javascript
+- Backend 
+    - PHP 8
+- Database
+    - PostgreSQL
+- Web server
+    - Nginx
+- Containerization
+    - Docker
+
+## Database Diagram
+
+![diagram](ERD.png)
+
