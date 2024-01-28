@@ -30,7 +30,6 @@
 						type="password"
 						placeholder="Enter your password"
 					/>
-					<a href="#">Forgot password?</a>
 				</div>
 				<button type="submit">Login</button>
 				<p>Don't have account? <a href="register">Sign up</a></p>

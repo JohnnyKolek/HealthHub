@@ -32,6 +32,7 @@
                     <input name="phone" type="text" placeholder="phone">
                 </div>
                 <button type="submit">REGISTER</button>
+                <p>You already have account? <a href="login">Sign in</a></p>
             </form>
         </div>
     </div>

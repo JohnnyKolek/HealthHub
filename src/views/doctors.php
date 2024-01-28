@@ -14,7 +14,7 @@
     </div>
     <ul>
         <li><a href="#">Doctors</a></li>
-        <li><a href="#">Personal Data</a></li>
+        <li><a href="personalData">Personal Data</a></li>
         <li><a href="logout">logout</a></li>
     </ul>
 </nav>
@@ -23,7 +23,7 @@
         <?php
         if (isset($doctors) && $doctors != null) {
             foreach ($doctors as $doctor): ?>
-                <div class="doctor" id="<?=$doctor['id']?>">
+                <div class="doctor" id="<?= $doctor['id'] ?>">
                     <div class="doctorCard">
                         <div class="info">
                             <div class="photo"><img src="public/img/doctor<?= $doctor['id'] ?>.jpg" alt=""/></div>

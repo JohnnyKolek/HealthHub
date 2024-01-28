@@ -31,22 +31,13 @@ div.container{
     gap: 5vh;
 }
 
-/*.menu div{*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    height: 60px;*/
-/*    background-color: #1F707B;*/
-/*    border-radius: 25px;*/
-/*}*/
-
 .menu a{
     display: flex;
     text-decoration: none;
     color: #fff;
     width: 25vw;
   align-items: center;
+    text-transform: uppercase;
     justify-content: center;
     background-color: #1F707B;
     border-radius: 25px;

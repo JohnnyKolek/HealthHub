@@ -18,7 +18,6 @@ class VisitRepository extends Repository
             ORDER BY date_time;
         ');
 
-        session_start();
         $stmt->bindParam(':id', $_SESSION['user_id'], PDO::PARAM_STR);
         $stmt->execute();
         $visits = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -36,7 +35,7 @@ class VisitRepository extends Repository
         return $result;
     }
 
-    public function getVisitsByDate(string  $date): array
+    public function getVisitsByDate(string $date): array
     {
         $result = [];
 
@@ -49,8 +48,7 @@ class VisitRepository extends Repository
         ");
 
 
-        error_log($date);
-        session_start();
+
         $stmt->bindParam(':id', $_SESSION['user_id'], PDO::PARAM_STR);
         $stmt->bindParam(':date', $date, PDO::PARAM_STR);
         $stmt->execute();
@@ -60,7 +58,7 @@ class VisitRepository extends Repository
             $result[] = new Visit(
                 $visit['id'],
                 $visit['doctor'],
-                $visit['patient'] == null ? '' : $visit['name']." ".$visit['surname'],
+                $visit['patient'] == null ? '' : $visit['name'] . " " . $visit['surname'],
                 $visit['date_time'],
                 $visit['completed'],
             );
@@ -69,7 +67,7 @@ class VisitRepository extends Repository
         return $result;
     }
 
-    public function getVisitsByDateAndDoctorId(string  $date, int $id): array
+    public function getVisitsByDateAndDoctorId(string $date, int $id): array
     {
         $result = [];
 
@@ -80,8 +78,6 @@ class VisitRepository extends Repository
         ");
 
 
-        error_log($date);
-        session_start();
         $stmt->bindParam(':id', $id, PDO::PARAM_STR);
         $stmt->bindParam(':date', $date, PDO::PARAM_STR);
         $stmt->execute();
@@ -170,10 +166,6 @@ class VisitRepository extends Repository
              WHERE id=:id;
         ');
 
-        $stmt->execute([
-            $patient,
-            $id
-        ]);
             $stmt->execute([
                 $patient,
                 $id
@@ -212,6 +204,33 @@ class VisitRepository extends Repository
     }
 
 
+    public function getPatientVisits(): array
+    {
+        $result = [];
+
+        $stmt = $this->database->connect()->prepare('
+            SELECT v.id as id, doctor, patient, name, surname, date_time, completed FROM visits as v
+            LEFT JOIN public.users u on u.id = v.doctor
+            LEFT JOIN public.user_details ud on ud.id = u.user_details_id
+            WHERE patient=:id                                                                      
+            ORDER BY date_time;
+        ');
+
+        $stmt->bindParam(':id', $_SESSION['user_id'], PDO::PARAM_STR);
+        $stmt->execute();
+        $visits = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($visits as $visit) {
+            $result[] = new Visit(
+                $visit['id'],
+                $visit['doctor'] == null ? '' : $visit['name'] . " " . $visit['surname'],
+                $visit['patient'],
+                $visit['date_time'],
+                $visit['completed'],
+            );
+        }
+
+        return $result;
     }
 
 

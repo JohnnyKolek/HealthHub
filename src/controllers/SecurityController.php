@@ -45,10 +45,10 @@ class SecurityController extends AppController
         $url = "http://$_SERVER[HTTP_HOST]";
         error_log($user->getRole());
         if ($user->getRole() === 'doctor'){
-            header("Location: {$url}/doctorMenu");
+            header("Location: $url/doctorMenu");
         }
         else {
-            header("Location: {$url}/menu");
+            header("Location: $url/menu");
         }
     }
 
@@ -78,7 +78,8 @@ class SecurityController extends AppController
     }
 
 
-    public function logout(){
+    public function logout(): void
+    {
         session_start();
         session_unset();
         session_destroy();
