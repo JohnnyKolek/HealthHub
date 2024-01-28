@@ -5,27 +5,25 @@ require_once __DIR__ . '/../repository/VisitRepository.php';
 
 class DoctorController extends AppController
 {
-    private UserRepository $userRepository;
     private VisitRepository $visitRepository;
 
     public function __construct()
     {
         parent::__construct();
-        $this->userRepository = new UserRepository();
         $this->visitRepository = new VisitRepository();
     }
 
     public function addVisit(): void
     {
         session_start();
-        if (!isset($_SESSION)){
-            $this->render("error");
+        if (!isset($_SESSION['user_role'])){
+            $this->render("error", ['message' => '401 Unauthorized']);
             return;
         }
 
         $role = $_SESSION['user_role'];
         if ($role !== 'doctor') {
-            $this->render('error');
+            $this->render('error', ['message' => '403 Forbidden']);
             return;
         }
 
@@ -59,13 +57,26 @@ class DoctorController extends AppController
     }
 
 
-    public function doctorMenu(){
+    public function doctorMenu(): void
+    {
+        session_start();
+        if (!isset($_SESSION['user_role'])){
+            $this->render("error", ['message' => '401 Unauthorized']);
+            return;
+        }
+
+        $role = $_SESSION['user_role'];
+        if ($role !== 'doctor') {
+            $this->render('error', ['message' => '403 Forbidden']);
+            return;
+        }
         $this->render('doctorMenu');
     }
 
 
-    public function getVisitsByDate()
+    public function getVisitsByDate(): void
     {
+        session_start();
         $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 
         if ($contentType === "application/json"){
@@ -78,19 +89,29 @@ class DoctorController extends AppController
             $visits = $this->visitRepository->getVisitsByDate($decoded['date']);
             $json = json_encode($visits);
             echo $json;
-            error_log($json);
         }
 
     }
 
-    public function doctorVisits()
+    public function doctorVisits(): void
     {
+        session_start();
+        if (!isset($_SESSION['user_role'])){
+            $this->render("error", ['message' => '401 Unauthorized']);
+            return;
+        }
+
+        $role = $_SESSION['user_role'];
+        if ($role !== 'doctor') {
+            $this->render('error', ['message' => '403 Forbidden']);
+            return;
+        }
+
         $visits = $this->visitRepository->getVisits();
 
         foreach ($visits as $visit) {
             $visit->getDate();
         }
-
 
         $this->render("doctorVisits", ['visits' => $visits]);
     }

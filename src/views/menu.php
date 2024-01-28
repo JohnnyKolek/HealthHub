@@ -13,7 +13,7 @@
     </div>
     <div class="menu">
         <a href="doctors">Book</a>
-        <a href="#">Personal Data</a>
+        <a href="personalData">Personal Data</a>
         <a href="index">Log out</a>
     </div>
 </div>

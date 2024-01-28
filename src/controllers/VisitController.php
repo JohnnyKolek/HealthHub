@@ -17,6 +17,18 @@ class VisitController extends AppController
 
     public function doctors(): void
     {
+        session_start();
+        if (!isset($_SESSION['user_role'])){
+            $this->render("error", ['message' => '401 Unauthorized']);
+            return;
+        }
+
+        $role = $_SESSION['user_role'];
+        if ($role !== 'patient') {
+            $this->render('error', ['message' => '403 Forbidden']);
+            return;
+        }
+
         $currentDate = new DateTime();
 
         $data = [

@@ -3,7 +3,8 @@
 require_once "AppController.php";
 
 class ErrorController extends AppController {
-    public function fileNotFound(){
+    public function fileNotFound(): void
+    {
         $this->render("error");
     }
 }

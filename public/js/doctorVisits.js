@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         console.log(today);
 
-
         fetch('/getVisitsByDate', {
             method: 'POST',
             headers: {
@@ -37,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     });
 
-
     const nextButton = document.querySelector('.next');
 
     nextButton.addEventListener('click', function () {
@@ -51,7 +49,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const formattedDate = tomorrow.toISOString().split('T')[0];
 
-
         fetch('/getVisitsByDate', {
             method: 'POST',
             headers: {
@@ -73,7 +70,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('There has been a problem with your fetch operation:', error);
             });
     });
-
 
     const prevButton = document.querySelector('.previous');
 
@@ -83,11 +79,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const today = new Date(date.textContent);
 
-
         const prevDay = new Date(today.getTime() - (24 * 60 * 60 * 1000));
 
         const formattedDate = prevDay.toISOString().split('T')[0];
-
 
         fetch('/getVisitsByDate', {
             method: 'POST',
@@ -110,7 +104,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('There has been a problem with your fetch operation:', error);
             });
     });
-
 
 });
 
@@ -132,5 +125,3 @@ function updateVisitsDisplay(visitsData, date) {
         visitsContainer.appendChild(clone);
     });
 }
-
-

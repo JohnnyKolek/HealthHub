@@ -7,6 +7,8 @@
     <title>ERROR</title>
 </head>
 <body>
-    <h1>404 - FILE NOT FOUND</h1>
+    <h1><?php
+        echo $message ?? '404 File not found';
+        ?></h1>
 </body>
 </html>
