@@ -15,7 +15,7 @@ class VisitController extends AppController
         $this->visitRepository = new VisitRepository();
     }
 
-    public function doctors()
+    public function doctors(): void
     {
         $currentDate = new DateTime();
 
@@ -56,7 +56,7 @@ class VisitController extends AppController
         $this->render('doctors', $data);
     }
 
-    public function getVisitsByDateAndDoctor()
+    public function getVisitsByDateAndDoctor(): void
     {
 
         $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
@@ -76,7 +76,7 @@ class VisitController extends AppController
         }
     }
 
-    public function reserveVisit()
+    public function reserveVisit(): void
     {
         $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 
@@ -89,9 +89,71 @@ class VisitController extends AppController
 
             session_start();
 
-            $this->visitRepository->reserveVisit($decoded['id'], $_SESSION['user_id']);
+            try {
+                $this->visitRepository->reserveVisit($decoded['id'], $_SESSION['user_id']);
+                echo json_encode([
+                    'response' => "Visit successfully reserved",
+                    'id' => $decoded['id']
+                ]);
+            } catch (Exception $e) {
+                error_log($e->getMessage());
+                echo json_encode(['response' => "Visit already reserved!"]);
+            }
 
         }
+    }
+
+    public function confirm(): void
+    {
+        session_start();
+        if (!isset($_SESSION['user_role'])){
+            $this->render("error", ['message' => '401 Unauthorized']);
+            return;
+        }
+
+        $role = $_SESSION['user_role'];
+        if ($role !== 'patient') {
+            $this->render('error', ['message' => '403 Forbidden']);
+            return;
+        }
+
+        $message = $_GET['message'];
+
+        if ($message != 'Visit successfully reserved') {
+            $this->render('confirm', [
+                'message' => $message
+            ]);
+            return;
+        }
+
+        $id = $_GET['id'];
+
+        $visit = $this->visitRepository->getVisitById($id);
+
+        $this->render('confirm', [
+            'message' => $message,
+            'doctor' => $visit->getDoctor(),
+            'date' => $visit->getDate()
+        ]);
+    }
+
+    public function personalData(): void
+    {
+        session_start();
+        if (!isset($_SESSION['user_role'])){
+            $this->render("error", ['message' => '401 Unauthorized']);
+            return;
+        }
+
+        $role = $_SESSION['user_role'];
+        if ($role !== 'patient') {
+            $this->render('error', ['message' => '403 Forbidden']);
+            return;
+        }
+
+        $visits = $this->visitRepository->getPatientVisits();
+        $user = $this->userRepository->getUserData($_SESSION['user_id']);
+        $this->render('personalData', ['visits' => $visits, 'user' => $user]);
     }
 
 }

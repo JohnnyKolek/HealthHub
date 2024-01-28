@@ -1,8 +1,8 @@
-body{
+body {
     margin: 0;
 }
 
-.container{
+.container {
     display: flex;
     background: #1F707B;
     width: 100vw;
@@ -11,14 +11,44 @@ body{
     justify-content: center;
 }
 
-.confirmation{
+.confirmation {
     display: flex;
     flex-direction: column;
     border-radius: 5vw;
     background: #fff;
-    width: 50vw;
-    height: 50vw;
+    width: 30vw;
+    height: 30vw;
     align-items: center;
     justify-content: center;
-    gap: 10vh;
+    gap: 5vh;
+}
+
+p {
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    min-width: 20vw;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #eeeeee;
+}
+
+a {
+    text-transform: uppercase;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    text-decoration: none;
+    color: #fff;
+    min-width: 10vw;
+    align-items: center;
+    justify-content: center;
+    background-color: #1F707B;
+    border-radius: 25px;
+    height: 60px;
+}
+
+a:hover{
+    background-color: #199A8E;
 }

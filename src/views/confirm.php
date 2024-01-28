@@ -9,9 +9,18 @@
 <body>
 <div class="container">
     <div class="confirmation">
-        <p>Appointment has been scheduled</p>
-        <p>Date: 7.01.2024 Hour: 13:00</p>
-        <div>ok</div>
+        <?php
+        if (isset($message)){
+            echo "<p>".$message."</p>";
+        }
+        if (isset($doctor)){
+            echo "<p>Doctor: ".$doctor."</p>";
+        }
+        if (isset($date)){
+            echo "<p>Date: ".$date."</p>";
+        }
+        ?>
+        <a href="menu">return to menu</a>
     </div>
 </body>
 </html>

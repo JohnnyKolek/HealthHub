@@ -27,7 +27,7 @@ class VisitRepository extends Repository
             $result[] = new Visit(
                 $visit['id'],
                 $visit['doctor'],
-                $visit['patient'] == null ? '' : $visit['name']." ".$visit['surname'],
+                $visit['patient'] == null ? '' : $visit['name'] . " " . $visit['surname'],
                 $visit['date_time'],
                 $visit['completed'],
             );
@@ -119,7 +119,7 @@ class VisitRepository extends Repository
 
             $exists = $stmt->fetchColumn() > 0;
 
-            if ($exists){
+            if ($exists) {
                 throw new Exception('Visits already exists!');
             }
 
@@ -133,30 +133,38 @@ class VisitRepository extends Repository
                 $visit->getDate(),
                 'false'
             ]);
-        }catch (Exception $e){
+
+            $connection->commit();
+        } catch (Exception $e) {
             $connection->rollBack();
             throw $e;
         }
     }
 
 
-    public function reserveVisit($id, $patient){
+    public function reserveVisit($id, $patient)
+    {
 
+        $connection = $this->database->connect();
+        $connection->beginTransaction();
 
+        try {
+            error_log("started");
 
-
-        $stmt = $this->database->connect()->prepare('
+            $stmt = $connection->prepare('
              SELECT COUNT(*) FROM visits
-             WHERE id=:id;
+             WHERE id=:id AND patient=:patient;
         ');
 
-        $exists = $stmt->fetchColumn() > 0;
+            $stmt->execute([$id, $patient]);
 
-        if ($exists){
-            throw new Exception('Visits already reserved!');
-        }
+            $exists = $stmt->fetchColumn() > 0;
 
-        $stmt = $this->database->connect()->prepare('
+            if ($exists) {
+                throw new Exception('Visit already reserved!');
+            }
+
+            $stmt = $connection->prepare('
              UPDATE visits
              SET patient=:patientId
              WHERE id=:id;
@@ -166,6 +174,43 @@ class VisitRepository extends Repository
             $patient,
             $id
         ]);
+            $stmt->execute([
+                $patient,
+                $id
+            ]);
+            $connection->commit();
+        } catch (Exception $e) {
+            $connection->rollBack();
+            throw $e;
+        }
+
+    }
+
+
+    public function getVisitById(int $id)
+    {
+
+        $stmt = $this->database->connect()->prepare("
+            SELECT v.id as id, doctor, patient, name, surname, date_time, completed FROM visits as v
+            LEFT JOIN public.users u on u.id = v.doctor
+            LEFT JOIN public.user_details ud on ud.id = u.user_details_id
+            WHERE v.id=:id 
+        ");
+
+        $stmt->bindParam(':id', $id, PDO::PARAM_STR);
+        $stmt->execute();
+        $visit = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $result = new Visit(
+            $visit['id'],
+            $visit['doctor'] == null ? '' : $visit['name'] . " " . $visit['surname'],
+            $visit['patient'],
+            $visit['date_time'],
+            $visit['completed']);
+
+        return $result;
+    }
+
 
     }
 
